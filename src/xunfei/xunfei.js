@@ -10,7 +10,7 @@ const appID = env.XUNFEI_APP_ID
 const apiKey = env.XUNFEI_API_KEY
 const apiSecret = env.XUNFEI_API_SECRET
 // 地址必须填写，代表着大模型的版本号！！！！！！！！！！！！！！！！
-const httpUrl = new URL('https://spark-api.xf-yun.com/v3.5/chat')
+const httpUrl = new URL('https://spark-api.xf-yun.com/v4.0/chat')
 
 let modelDomain // V1.1-V3.5动态获取，高于以上版本手动指定
 function authenticate() {
@@ -29,6 +29,8 @@ function authenticate() {
     case '/v3.5/chat':
       modelDomain = 'generalv3.5'
       break
+    case '/v4.0/chat':
+      modelDomain = '4.0ultra'
   }
 
   return new Promise((resolve, reject) => {
@@ -63,7 +65,6 @@ export async function xunfeiSendMsg(inputVal) {
       let params = {
         header: {
           app_id: appID,
-          uid: 'fd3f47e4-d',
         },
         parameter: {
           chat: {
